@@ -55,7 +55,7 @@
 #include <drivers/drv_hrt.h>
 
 #include <perf/perf_counter.h>
-#include <pwm_limit/pwm_limit.h>
+#include <output_limit/output_limit.h>
 
 #include <stm32_uart.h>
 
@@ -68,7 +68,7 @@ struct sys_state_s 	system_state;
 
 static struct hrt_call serial_dma_call;
 
-pwm_limit_t pwm_limit;
+output_limit_t pwm_limit;
 
 float dt;
 
@@ -266,8 +266,8 @@ user_start(int argc, char *argv[])
 
 	up_cxxinitialize();
 
-#	if defined(CONFIG_EXAMPLES_NSH_CXXINITIALIZE)
-#  		error CONFIG_EXAMPLES_NSH_CXXINITIALIZE Must not be defined! Use CONFIG_HAVE_CXX and CONFIG_HAVE_CXXINITIALIZE.
+#	if defined(CONFIG_SYSTEM_NSH_CXXINITIALIZE)
+#  		error CONFIG_SYSTEM_NSH_CXXINITIALIZE Must not be defined! Use CONFIG_HAVE_CXX and CONFIG_HAVE_CXXINITIALIZE.
 #	endif
 
 #else
@@ -338,7 +338,7 @@ user_start(int argc, char *argv[])
 	syslog(LOG_INFO, "MEM: free %u, largest %u\n", minfo.mxordblk, minfo.fordblks);
 
 	/* initialize PWM limit lib */
-	pwm_limit_init(&pwm_limit);
+	output_limit_init(&pwm_limit);
 
 	/*
 	 *    P O L I C E    L I G H T S

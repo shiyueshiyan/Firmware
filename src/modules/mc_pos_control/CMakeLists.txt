@@ -30,11 +30,14 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 ############################################################################
+
+add_subdirectory(Takeoff)
+
 px4_add_module(
 	MODULE modules__mc_pos_control
 	MAIN mc_pos_control
 	COMPILE_FLAGS
-	STACK_MAIN 1200
+		-Wno-implicit-fallthrough # TODO: fix and remove
 	SRCS
 		mc_pos_control_main.cpp
 		PositionControl.cpp
@@ -44,4 +47,7 @@ px4_add_module(
 		FlightTasks
 		git_ecl
 		ecl_geo
+		WeatherVane
+		CollisionPrevention
+		Takeoff
 	)

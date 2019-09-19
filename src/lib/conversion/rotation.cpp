@@ -37,6 +37,7 @@
  * Vector rotation library
  */
 
+#include <px4_defines.h>
 #include "math.h"
 #include "rotation.h"
 
@@ -274,6 +275,14 @@ rotate_3f(enum Rotation rot, float &x, float &y, float &z)
 			tmp = M_SQRT1_2_F * x - M_SQRT1_2_F * z;
 			z = M_SQRT1_2_F * z + M_SQRT1_2_F * x;
 			x = tmp;
+			return;
+		}
+
+	case ROTATION_ROLL_90_YAW_270: {
+			tmp = x;
+			x = -z;
+			z = y;
+			y = -tmp;
 			return;
 		}
 	}

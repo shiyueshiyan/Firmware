@@ -35,8 +35,10 @@
 #define _uORBManager_hpp_
 
 #include "uORBCommon.hpp"
-#include "uORBDevices.hpp"
+#include "uORBDeviceMaster.hpp"
+
 #include <stdint.h>
+
 #ifdef __PX4_NUTTX
 #include "ORBSet.hpp"
 #else
@@ -72,6 +74,12 @@ public:
 	 * @return true on success
 	 */
 	static bool initialize();
+
+	/**
+	 * Terminate the singleton. Call this after everything else.
+	 * @return true on success
+	 */
+	static bool terminate();
 
 	/**
 	 * Method to get the singleton instance for the uORB::Manager.
@@ -396,7 +404,7 @@ private: // class methods
 	 * Handles creation of the object and the initial publication for
 	 * advertisers.
 	 */
-	int node_open(const struct orb_metadata *meta, const void *data, bool advertiser, int *instance = nullptr,
+	int node_open(const struct orb_metadata *meta, bool advertiser, int *instance = nullptr,
 		      int priority = ORB_PRIO_DEFAULT);
 
 private: // data members
@@ -414,7 +422,7 @@ private: // data members
 
 private: //class methods
 	Manager();
-	~Manager();
+	virtual ~Manager();
 
 #ifdef ORB_COMMUNICATOR
 	/**

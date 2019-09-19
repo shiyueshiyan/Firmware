@@ -42,12 +42,11 @@ px4_add_module(
 		#-DMAVLINK_FTP_DEBUG
 		-DMavlinkStream=MavlinkStreamTest
 		-DMavlinkFTP=MavlinkFTPTest
+		-Wno-cast-align # TODO: fix and enable
+		-Wno-address-of-packed-member # TODO: fix in c_library_v2
 	SRCS
 		mavlink_tests.cpp
 		mavlink_ftp_test.cpp
 		../mavlink_stream.cpp
 		../mavlink_ftp.cpp
-		../mavlink.c
-	DEPENDS
 	)
-
